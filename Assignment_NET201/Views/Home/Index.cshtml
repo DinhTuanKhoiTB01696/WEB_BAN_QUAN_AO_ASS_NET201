@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Assignment_NET201.Models.Product>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<!-- Hero Carousel -->
+<div id="heroCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="ratio ratio-21x9">
+                <img src="~/images/banners/banner1.png" class="d-block w-100 object-fit-cover" alt="Streetwear Collection">
+            </div>
+            <div class="carousel-caption d-none d-md-block pb-5 text-start">
+                <h1 class="display-3 fw-bold text-uppercase" style="font-family: 'Anton', sans-serif; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">ICONDENIM</h1>
+                <p class="lead fw-light mb-4 text-white" style="text-shadow: 1px 1px 5px rgba(0,0,0,0.8);">Reimagining modern streetwear for the bold.</p>
+                <a asp-action="Shop" class="btn btn-light rounded-0 px-5 py-3 fw-bold text-uppercase shadow">Shop Now</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="ratio ratio-21x9">
+                <img src="~/images/banners/banner2.png" class="d-block w-100 object-fit-cover" alt="Summer Collection">
+            </div>
+             <div class="carousel-caption d-none d-md-block pb-5 text-end">
+                <h1 class="display-3 fw-bold text-uppercase" style="font-family: 'Anton', sans-serif; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">NEW ARRIVALS</h1>
+                <p class="lead fw-light mb-4 text-white" style="text-shadow: 1px 1px 5px rgba(0,0,0,0.8);">Discover the latest trends for the season.</p>
+                <a asp-action="Shop" class="btn btn-outline-light rounded-0 px-5 py-3 fw-bold text-uppercase shadow backdrop-blur">View Collection</a>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Best Sellers -->
+<div class="container mb-5">
+    <div class="text-center mb-5">
+        <h2 class="text-uppercase fw-bold" style="font-family: 'Anton', sans-serif;">Best Sellers</h2>
+        <div class="mx-auto bg-black" style="width: 50px; height: 3px;"></div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm product-card">
+                    <div class="position-relative overflow-hidden">
+                        <a asp-action="ProductDetail" asp-route-id="@item.Id">
+                            <img src="@item.ImageUrl" class="card-img-top rounded-0" alt="@item.Name" style="height: 350px; object-fit: cover;">
+                        </a>
+                        @if (item.Price < 300000)
+                        {
+                            <span class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 small fw-bold mt-2 ms-2">HOT</span>
+                        }
+                    </div>
+                    <div class="card-body text-center">
+                        <h6 class="card-title text-uppercase fw-bold mb-1">
+                            <a asp-action="ProductDetail" asp-route-id="@item.Id" class="text-decoration-none text-dark">@item.Name</a>
+                        </h6>
+                        <p class="card-text text-secondary fw-bold">@item.Price.ToString("N0") VND</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    
+    <div class="text-center mt-5">
+        <a asp-action="Shop" class="btn btn-outline-dark rounded-0 px-5 text-uppercase fw-bold">View All Products</a>
+    </div>
+</div>
+
+<!-- Collection Banner -->
+<div class="container-fluid px-0 mb-5">
+    <div class="row g-0">
+        <div class="col-md-6 position-relative">
+             <img src="https://placehold.co/800x600?text=Summer+Vibes" class="img-fluid w-100" style="height: 500px; object-fit: cover;">
+             <div class="position-absolute bottom-0 start-0 p-5 text-white">
+                 <h3 class="fw-bold text-uppercase">Summer Collection</h3>
+                 <a asp-action="Shop" class="text-white text-decoration-underline text-uppercase fw-bold">Discover</a>
+             </div>
+        </div>
+        <div class="col-md-6 position-relative">
+             <img src="https://placehold.co/800x600?text=Denim+Culture" class="img-fluid w-100" style="height: 500px; object-fit: cover;">
+             <div class="position-absolute bottom-0 start-0 p-5 text-white">
+                 <h3 class="fw-bold text-uppercase">Denim Culture</h3>
+                 <a asp-action="Shop" class="text-white text-decoration-underline text-uppercase fw-bold">Explore</a>
+             </div>
+        </div>
+    </div>
+</div>

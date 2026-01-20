@@ -1,0 +1,88 @@
+@model Assignment_NET201.Models.Product
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <!-- Product Images -->
+        <div class="col-md-6 mb-4">
+            <div class="bg-light p-3">
+                <img src="@Model.ImageUrl" class="img-fluid w-100 object-fit-cover" alt="@Model.Name"
+                    style="max-height: 600px;">
+            </div>
+            <div class="row g-2 mt-2">
+                <!-- Thumbnails (Placeholder for now) -->
+                <div class="col-3"><img src="@Model.ImageUrl" class="img-fluid opacity-75 border"></div>
+                <div class="col-3"><img src="@Model.ImageUrl" class="img-fluid opacity-50 border"></div>
+            </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-md-6">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent p-0 small">
+                    <li class="breadcrumb-item"><a asp-action="Index"
+                            class="text-secondary text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Shop"
+                            class="text-secondary text-decoration-none">Shop</a></li>
+                    <li class="breadcrumb-item active text-dark" aria-current="page">@Model.Name</li>
+                </ol>
+            </nav>
+
+            <h1 class="fw-bold text-uppercase mb-2" style="font-family: 'Anton', sans-serif;">@Model.Name</h1>
+            <h3 class="fw-light text-secondary mb-4">@Model.Price.ToString("N0") VND</h3>
+
+            <div class="mb-4">
+                <p class="lead">@Model.Description</p>
+                <p class="small text-secondary">A premium essential for your wardrobe. Designed for comfort and style,
+                    this piece fits perfectly into any streetwear collection.</p>
+            </div>
+
+            <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                <input type="hidden" name="productId" value="@Model.Id" />
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold text-uppercase small">Size</label>
+                    <div class="d-flex gap-2">
+                        <input type="radio" class="btn-check" name="size" id="size-s" value="S" autocomplete="off">
+                        <label class="btn btn-outline-dark rounded-0 px-3" for="size-s">S</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-m" value="M" autocomplete="off"
+                            checked>
+                        <label class="btn btn-outline-dark rounded-0 px-3" for="size-m">M</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-l" value="L" autocomplete="off">
+                        <label class="btn btn-outline-dark rounded-0 px-3" for="size-l">L</label>
+
+                        <input type="radio" class="btn-check" name="size" id="size-xl" value="XL" autocomplete="off">
+                        <label class="btn btn-outline-dark rounded-0 px-3" for="size-xl">XL</label>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-dark btn-lg rounded-0 text-uppercase fw-bold py-3" type="submit">
+                        Add to Cart <i class="fas fa-shopping-bag ms-2"></i>
+                    </button>
+                    <!-- Wishlist button remains outside form or can be handled separately -->
+                </div>
+            </form>
+            <div class="d-grid gap-2 mt-2">
+                <button class="btn btn-outline-secondary rounded-0 text-uppercase fw-bold" type="button">
+                    <i class="far fa-heart me-2"></i> Add to Wishlist
+                </button>
+            </div>
+
+            <div class="mt-5 border-top pt-4">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <i class="fas fa-truck text-secondary"></i>
+                    <span class="small">Free shipping on orders over 1,000,000 VND</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <i class="fas fa-undo text-secondary"></i>
+                    <span class="small">30-day return policy</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
