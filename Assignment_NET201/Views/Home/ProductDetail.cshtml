@@ -37,6 +37,11 @@
                 <p class="lead">@Model.Description</p>
                 <p class="small text-secondary">A premium essential for your wardrobe. Designed for comfort and style,
                     this piece fits perfectly into any streetwear collection.</p>
+                <div class="mt-2">
+                    <span class="badge bg-light text-dark border p-2">
+                        <i class="fas fa-box me-1"></i> Còn lại: @Model.Quantity sản phẩm
+                    </span>
+                </div>
             </div>
 
             <form asp-controller="Cart" asp-action="AddToCart" method="post">

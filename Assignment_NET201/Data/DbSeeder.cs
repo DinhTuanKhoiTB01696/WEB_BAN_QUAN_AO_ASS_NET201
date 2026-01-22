@@ -16,8 +16,21 @@ namespace Assignment_NET201.Data
             var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            // Ensure database is created
-            await context.Database.EnsureCreatedAsync();
+            // Use Migrate instead of EnsureCreated to support migrations
+            try 
+            {
+                await context.Database.MigrateAsync();
+            }
+            catch (Exception)
+            {
+                // If migration fails because tables already exist (due to previous EnsureCreated)
+                // we manually add missing columns
+                try 
+                {
+                    await context.Database.ExecuteSqlRawAsync("IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[Products]') AND name = 'Quantity') BEGIN ALTER TABLE [Products] ADD [Quantity] int NOT NULL DEFAULT 10; END");
+                }
+                catch { }
+            }
 
             // Seed Roles
             string[] roles = { "Admin", "Customer", "Guest" };

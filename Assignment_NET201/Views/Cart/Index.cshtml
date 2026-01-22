@@ -7,6 +7,14 @@
 <div class="container mt-5 mb-5">
     <h2 class="fw-bold text-uppercase mb-4" style="font-family: 'Anton', sans-serif;">Shopping Cart</h2>
 
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show rounded-0" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i> @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
     @if (Model.Any())
     {
         <div class="row">

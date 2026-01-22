@@ -37,9 +37,30 @@ namespace Assignment_NET201.Controllers
             var cart = HttpContext.Session.Get<List<CartItem>>("Cart") ?? new List<CartItem>();
             var existingItem = cart.FirstOrDefault(c => c.ProductId == productId && c.Size == size);
 
+            int currentInCart = existingItem?.Quantity ?? 0;
+            int totalNewQuantity = currentInCart + quantity;
+
+            if (totalNewQuantity > product.Quantity)
+            {
+                TempData["Message"] = $"Số lượng chỉ còn {product.Quantity} không thể thêm";
+                totalNewQuantity = product.Quantity;
+            }
+
+            if (totalNewQuantity <= 0 && product.Quantity > 0)
+            {
+                // This shouldn't happen with quantity = 1, but for safety
+                totalNewQuantity = 1; 
+            }
+            
+            if (product.Quantity <= 0)
+            {
+                TempData["Message"] = "Sản phẩm đã hết hàng";
+                return RedirectToAction("Index");
+            }
+
             if (existingItem != null)
             {
-                existingItem.Quantity += quantity;
+                existingItem.Quantity = totalNewQuantity;
             }
             else
             {
@@ -48,7 +69,7 @@ namespace Assignment_NET201.Controllers
                     ProductId = product.Id,
                     ProductName = product.Name,
                     Price = product.Price,
-                    Quantity = quantity,
+                    Quantity = totalNewQuantity,
                     ImageUrl = product.ImageUrl,
                     Size = size
                 });
@@ -105,6 +126,18 @@ namespace Assignment_NET201.Controllers
                     Price = c.Price
                 }).ToList()
             };
+
+            // Decrease product quantities
+            foreach (var item in cart)
+            {
+                var p = await _context.Products.FindAsync(item.ProductId);
+                if (p != null)
+                {
+                    p.Quantity -= item.Quantity;
+                    if (p.Quantity < 0) p.Quantity = 0;
+                    _context.Update(p);
+                }
+            }
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();

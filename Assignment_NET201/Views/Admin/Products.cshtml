@@ -21,6 +21,7 @@
                         <th class="ps-4">Product</th>
                         <th>Category</th>
                         <th>Price</th>
+                        <th>Quantity</th>
                         <th>Status</th>
                         <th class="text-end pe-4">Actions</th>
                     </tr>
@@ -52,6 +53,7 @@
                             </td>
                             <td><span class="badge bg-light text-dark border">@item.Category?.Name</span></td>
                             <td class="fw-bold">@item.Price.ToString("N0")</td>
+                            <td>@item.Quantity</td>
                             <td>
                                 @if (item.IsActive)
                                 {

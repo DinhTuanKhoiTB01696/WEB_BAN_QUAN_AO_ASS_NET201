@@ -35,15 +35,19 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label asp-for="Price" class="form-label fw-bold small">Price (VND)</label>
                             <input asp-for="Price" class="form-control" type="number" placeholder="0" />
                             <span asp-validation-for="Price" class="text-danger small"></span>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="Quantity" class="form-label fw-bold small">Quantity</label>
+                            <input asp-for="Quantity" class="form-control" type="number" placeholder="0" />
+                            <span asp-validation-for="Quantity" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <label class="form-label fw-bold small">Product Image</label>
                             <input type="file" name="imageFile" class="form-control" accept="image/*" />
-                            <!-- Hidden input for ImageUrl is not strictly needed for Create but good for model binding if we had logic -->
                             <input type="hidden" asp-for="ImageUrl" />
                             <span asp-validation-for="ImageUrl" class="text-danger small"></span>
                         </div>

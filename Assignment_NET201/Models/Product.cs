@@ -22,6 +22,8 @@ namespace Assignment_NET201.Models
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
+        public int Quantity { get; set; }
+
         public bool IsActive { get; set; } = true;
 
         public ICollection<ComboProduct> ComboProducts { get; set; }
