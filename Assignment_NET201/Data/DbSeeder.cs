@@ -72,22 +72,22 @@ namespace Assignment_NET201.Data
                 context.Products.AddRange(new List<Product>
                 {
                     // T-Shirts
-                    new Product { Name = "Basic White Tee", Description = "Premium cotton essential.", Price = 250000, CategoryId = tshirts.Id, ImageUrl = "/images/man-basic-white-polo-shirt-apparel-studio-shoot.jpg" },
-                    new Product { Name = "Graphic Print Tee", Description = "Urban style graphic tee.", Price = 350000, CategoryId = tshirts.Id, ImageUrl = "https://placehold.co/400x500?text=Graphic+Tee" },
-                    new Product { Name = "Oversized Black Tee", Description = "Streetwear fit.", Price = 300000, CategoryId = tshirts.Id, ImageUrl = "https://placehold.co/400x500?text=Black+Tee" },
+                    new Product { Name = "Basic White Tee", Description = "Premium cotton essential.", Price = 250000, CategoryId = tshirts.Id, ImageUrl = "/images/BASIC WHITE TEE.jpg" },
+                    new Product { Name = "Graphic Print Tee", Description = "Urban style graphic tee.", Price = 350000, CategoryId = tshirts.Id, ImageUrl = "/images/GRAPHIC PRINT TEE.jpg" },
+                    new Product { Name = "Oversized Black Tee", Description = "Streetwear fit.", Price = 300000, CategoryId = tshirts.Id, ImageUrl = "/images/OVERSIZED BLACK TEE.avif" },
                     
                     // Jeans
-                    new Product { Name = "Slim Fit Ripped Jeans", Description = "Edgy look with comfort stretch.", Price = 650000, CategoryId = jeans.Id, ImageUrl = "https://placehold.co/400x500?text=Ripped+Jeans" },
-                    new Product { Name = "Classic Straight Cut", Description = "Timeless denim style.", Price = 600000, CategoryId = jeans.Id, ImageUrl = "https://placehold.co/400x500?text=Classic+Jeans" },
-                    new Product { Name = "Black Skinny Jeans", Description = "Rockstar aesthetic.", Price = 700000, CategoryId = jeans.Id, ImageUrl = "https://placehold.co/400x500?text=Skinny+Jeans" },
+                    new Product { Name = "Slim Fit Ripped Jeans", Description = "Edgy look with comfort stretch.", Price = 650000, CategoryId = jeans.Id, ImageUrl = "/images/Slim Fit Ripped Jeans.jpg" },
+                    new Product { Name = "Classic Straight Cut", Description = "Timeless denim style.", Price = 600000, CategoryId = jeans.Id, ImageUrl = "/images/Classic Straight Cut.jpg" },
+                    new Product { Name = "Black Skinny Jeans", Description = "Rockstar aesthetic.", Price = 700000, CategoryId = jeans.Id, ImageUrl = "/images/Black Skinny Jeans.jpg" },
 
                     // Jackets
-                    new Product { Name = "Denim Jacket", Description = "Rugged and durable.", Price = 900000, CategoryId = jackets.Id, ImageUrl = "https://placehold.co/400x500?text=Denim+Jacket" },
-                    new Product { Name = "Bomber Jacket", Description = "Classic aviator style.", Price = 850000, CategoryId = jackets.Id, ImageUrl = "https://placehold.co/400x500?text=Bomber" },
+                    new Product { Name = "Denim Jacket", Description = "Rugged and durable.", Price = 900000, CategoryId = jackets.Id, ImageUrl = "/images/Denim Jacket.jpg" },
+                    new Product { Name = "Bomber Jacket", Description = "Classic aviator style.", Price = 850000, CategoryId = jackets.Id, ImageUrl = "/images/BOMBER JACKET.jpg" },
                     
                     // More T-Shirts
-                    new Product { Name = "Striped Polo", Description = "Smart casual choice.", Price = 400000, CategoryId = tshirts.Id, ImageUrl = "/images/man-woman-basic-white-polo-shirts-apparel-studio-shoot.jpg" }, // Using the second image I saw earlier
-                    new Product { Name = "V-Neck Sweater", Description = "Lightweight knit.", Price = 450000, CategoryId = tshirts.Id, ImageUrl = "https://placehold.co/400x500?text=Sweater" }
+                    new Product { Name = "Striped Polo", Description = "Smart casual choice.", Price = 400000, CategoryId = tshirts.Id, ImageUrl = "/images/STRIPED POLO.jpg" },
+                    new Product { Name = "V-Neck Sweater", Description = "Lightweight knit.", Price = 450000, CategoryId = tshirts.Id, ImageUrl = "/images/V-NECK SWEATER.jpg" }
                 });
                 await context.SaveChangesAsync();
             }
