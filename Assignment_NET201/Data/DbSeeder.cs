@@ -91,6 +91,31 @@ namespace Assignment_NET201.Data
                 });
                 await context.SaveChangesAsync();
             }
+            else
+            {
+                // Force update existing products if they have placeholder images or old paths
+                var products = await context.Products.ToListAsync();
+                bool changed = false;
+                foreach (var p in products)
+                {
+                    string oldUrl = p.ImageUrl ?? "";
+                    if (oldUrl.Contains("placehold.co") || oldUrl.Contains("studio-shoot"))
+                    {
+                        if (p.Name == "Basic White Tee") p.ImageUrl = "/images/BASIC WHITE TEE.jpg";
+                        else if (p.Name == "Graphic Print Tee") p.ImageUrl = "/images/GRAPHIC PRINT TEE.jpg";
+                        else if (p.Name == "Oversized Black Tee") p.ImageUrl = "/images/OVERSIZED BLACK TEE.avif";
+                        else if (p.Name == "Slim Fit Ripped Jeans") p.ImageUrl = "/images/Slim Fit Ripped Jeans.jpg";
+                        else if (p.Name == "Classic Straight Cut") p.ImageUrl = "/images/Classic Straight Cut.jpg";
+                        else if (p.Name == "Black Skinny Jeans") p.ImageUrl = "/images/Black Skinny Jeans.jpg";
+                        else if (p.Name == "Denim Jacket") p.ImageUrl = "/images/Denim Jacket.jpg";
+                        else if (p.Name == "Bomber Jacket") p.ImageUrl = "/images/BOMBER JACKET.jpg";
+                        else if (p.Name == "Striped Polo") p.ImageUrl = "/images/STRIPED POLO.jpg";
+                        else if (p.Name == "V-Neck Sweater") p.ImageUrl = "/images/V-NECK SWEATER.jpg";
+                        changed = true;
+                    }
+                }
+                if (changed) await context.SaveChangesAsync();
+            }
         }
     }
 }
