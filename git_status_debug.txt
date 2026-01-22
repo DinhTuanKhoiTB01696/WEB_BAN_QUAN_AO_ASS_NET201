@@ -1,0 +1,20 @@
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   Assignment_NET201/Controllers/AccountController.cs
+	modified:   Assignment_NET201/Controllers/AdminController.cs
+	modified:   Assignment_NET201/ViewModels/RegisterViewModel.cs
+	modified:   Assignment_NET201/Views/Admin/Users.cshtml
+	modified:   Assignment_NET201/Views/Shared/_Layout.cshtml
+	deleted:    git_status_final.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Assignment_NET201/Views/Admin/EditUser.cshtml
+	git_log_debug.txt
+	git_status_debug.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")

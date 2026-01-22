@@ -63,7 +63,10 @@
                                     <i class="far fa-user"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end rounded-0 shadow-sm border-0">
-                                    <li><span class="dropdown-item-text text-muted small">Hello, @User.Identity?.Name</span></li>
+                                    @{
+                                        var currentUser = await UserManager.GetUserAsync(User);
+                                    }
+                                    <li><span class="dropdown-item-text text-muted small">Hello, @(currentUser?.FullName ?? User.Identity?.Name)</span></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile">My Profile</a></li>
                                     <li><a class="dropdown-item" asp-controller="Account" asp-action="MyOrders">My Orders</a></li>

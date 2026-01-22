@@ -1,0 +1,30 @@
+commit 17e418a0c95a03de989ceacbfe24ea1014bf2bd5
+Author: DanhOcCho <danhnttb01630@gmail.com>
+Date:   Fri Jan 23 00:30:52 2026 +0700
+
+    update order management views and controller
+
+commit 67e1424b56c39a32912f244dfd7ecdbca1dbe866
+Author: DanhOcCho <danhnttb01630@gmail.com>
+Date:   Fri Jan 23 00:05:27 2026 +0700
+
+    Add validation to prevent negative values for Price and Quantity
+
+commit a8c6bc021e8685f4e0557061cd45786bd0499981
+Merge: ea7171b 26f986f
+Author: DanhOcCho <danhnttb01630@gmail.com>
+Date:   Fri Jan 23 00:00:09 2026 +0700
+
+    Merge branch 'main' of https://github.com/DinhTuanKhoiTB01696/WEB_BAN_QUAN_AO_ASS_NET201
+
+commit ea7171b070cb984d030efe1a3e471df9a6f8367d
+Author: DanhOcCho <danhnttb01630@gmail.com>
+Date:   Thu Jan 22 23:57:31 2026 +0700
+
+    Add product quantity management and cart logic limits
+
+commit 322e5ae2fb60de1f39fe97ed89593da2f7580aaf
+Author: DanhOcCho <danhnttb01630@gmail.com>
+Date:   Thu Jan 22 19:34:13 2026 +0700
+
+    Force update existing product image paths in seeder

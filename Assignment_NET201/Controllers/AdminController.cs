@@ -1,5 +1,6 @@
 using Assignment_NET201.Data;
 using Assignment_NET201.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,11 +15,15 @@ namespace Assignment_NET201.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AdminController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public AdminController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         // Dashboard
@@ -190,7 +195,81 @@ namespace Assignment_NET201.Controllers
         public async Task<IActionResult> Users()
         {
             var users = await _context.Users.ToListAsync();
+            var userRoles = new Dictionary<string, IList<string>>();
+            foreach (var user in users)
+            {
+                userRoles[user.Id] = await _userManager.GetRolesAsync(user);
+            }
+            ViewBag.UserRoles = userRoles;
             return View(users);
+        }
+
+        public async Task<IActionResult> EditUser(string id)
+        {
+            if (id == null) return NotFound();
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null) return NotFound();
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var allRoles = _roleManager.Roles.ToList();
+
+            ViewBag.Roles = new SelectList(allRoles, "Name", "Name", userRoles.FirstOrDefault());
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUser(string id, AppUser appUser, string selectedRole)
+        {
+            if (id != appUser.Id) return NotFound();
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null) return NotFound();
+
+            user.FullName = appUser.FullName;
+            user.Address = appUser.Address;
+            user.Email = appUser.Email;
+            user.PhoneNumber = appUser.PhoneNumber;
+            // UserName is usually same as Email in default identity, but let's keep it simple or sync them
+            user.UserName = appUser.Email;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                var currentRoles = await _userManager.GetRolesAsync(user);
+                var resultRemove = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                if (resultRemove.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(selectedRole))
+                    {
+                        await _userManager.AddToRoleAsync(user, selectedRole);
+                    }
+                }
+                return RedirectToAction(nameof(Users));
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            var allRoles = _roleManager.Roles.ToList();
+            var userRoles = await _userManager.GetRolesAsync(user);
+            ViewBag.Roles = new SelectList(allRoles, "Name", "Name", userRoles.FirstOrDefault());
+            return View(appUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
+            return RedirectToAction(nameof(Users));
         }
     }
 }

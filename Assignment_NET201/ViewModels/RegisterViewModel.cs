@@ -26,7 +26,7 @@ namespace Assignment_NET201.ViewModels
         public string Address { get; set; }
 
         [Required]
-        [Phone]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits and contain only numbers.")]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }

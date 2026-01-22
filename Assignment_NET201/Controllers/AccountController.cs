@@ -143,6 +143,11 @@ namespace Assignment_NET201.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return NotFound();
 
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             // Note: Password update is handled separately typically, but for this assignment allowing update via profile is ok if simplifying
             // However, typical flow is only update details.
             // We'll update details only here.
