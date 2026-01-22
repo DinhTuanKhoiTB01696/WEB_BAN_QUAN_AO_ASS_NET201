@@ -169,6 +169,23 @@ namespace Assignment_NET201.Controllers
             return View(orders);
         }
 
+        public async Task<IActionResult> OrderDetail(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var order = await _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Product)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Combo)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (order == null) return NotFound();
+
+            return View(order);
+        }
+
         // --- USERS ---
         public async Task<IActionResult> Users()
         {
